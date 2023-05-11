@@ -1,0 +1,70 @@
+%%[
+SET @showForm = 1 // used to control whether show the Form
+SET @fname = RequestParameter('fname') // Get the Fist Name field of the Form
+SET @lname = RequestParameter('lname') // Get the Last Name field of the Form
+SET @email = RequestParameter('email') // Get the Email field of the Form
+SET @company = RequestParameter('company')  // Get the Company field of the Form
+SET @OpenId = RequestParameter('OpenId')    // Get the OpenId of the Wechat user
+
+IF NOT EMPTY(@email) AND NOT EMPTY(@lname) THEN
+
+/* Success */
+//-- Get the Score for user who submitted the Form
+var @score
+set @score = 0
+set @rows = LookupRows("LeadScoreRule","RuleName", "Landingpage_NeedMoreInfo_Submitted")
+set @rowCount = rowcount(@rows)
+
+if @rowCount > 0 then
+
+  set @row = row(@rows, 1) 
+  set @score = field(@row,"RuleScore")
+
+]%%
+
+%%[ endif ]%%
+
+%%[
+
+//--- Unsert the record of the Form to DE
+SET @records = UpsertData('DEtoTestPush2CRM', 1, 'Email', @email, 'FirstName', @fname, 'LastName', @lname, 'Company',  @company, 'OpenId', @OpenId , 'Score', @score)  
+SET @message = "Thanks for your subscription!"
+SET @showForm = 0 
+
+ELSE
+/* Fail */
+SET @message = "Please fill in the mandatory fields of the form."
+
+ENDIF
+
+]%%
+
+%%[IF  @showForm == 1 THEN]%%
+<form style="text-align:center" method="post">
+  <label for="fname">First Name: </label><input type="text" id="fname" name="fname"><br>
+  <label for="lname">Last Name: </label><input type="text" id="lname" name="lname"><br>
+  <label for="email">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Email: </label><input type="email" id="" name="email"><br>
+  <label for="company">&nbsp Company: </label><input type="text" id="company" name="company"><br>
+  <label for="OpenId" style="display:none;">&nbsp OpenId: </label><input type="text" id="OpenId" name="OpenId" value="123456" style="display:none;"><br>
+  <input type="submit">
+</form>
+
+<script>
+    //--- Get the OpenId which passed through the URL parameter 
+    let openid = getParams('openid');
+    let $OpenId = document.querySelector("#OpenId");
+    $OpenId.value = openid;
+    function getParams(name) {
+     let reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+     let r = window.location.search.substr(1).match(reg);
+     if (r) {
+         return decodeURI(r[2]);
+     }
+     return null;
+ };
+</script>
+
+<br><br>
+%%[ELSE]%%
+%%=v(@message)=%%
+%%[ENDIF]%%
