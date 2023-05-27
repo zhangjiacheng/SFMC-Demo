@@ -1,0 +1,111 @@
+<html>
+    <head>
+        <style>
+
+            .card-container {
+                background-color:rgb(202, 244, 251);
+                text-align: center;
+                width: 400px;
+                height: 640px;
+                margin: auto;
+            }
+
+            .flex-box {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              }
+
+            .arrow-right {
+                width: 0; 
+                height: 0; 
+                border-top: 15px solid transparent;
+                border-bottom: 15px solid transparent;
+                border-left: 10px solid rgb(202, 244, 251);
+                margin-right: -10px;
+                z-index: 2;
+              }
+              
+              .arrow-left {
+                width: 0; 
+                height: 0; 
+                border-top: 15px solid transparent;
+                border-bottom: 15px solid transparent; 
+                border-right:10px solid rgb(202, 244, 251);
+                margin-left: -10px;
+                z-index: 2;
+
+              }
+
+              .mid-rectangle {
+                width: 100px;
+                height: 30px;
+                background-color: rgb(32, 183, 255);
+                z-index: 1;
+                padding-left: 17px;
+                padding-right: 18px;
+                color: white;
+                text-align: center;
+                line-height: 30px;
+              }
+              .white-cycle {
+                width: 200px;
+                height: 200px;
+                border-radius: 100px;
+                background-color: white;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              }
+              .wavy {
+                position: relative;
+                width: 400px;
+                height: 8px;
+                overflow: hidden;
+                background:url('./imgs/triangle.png');
+                background-repeat: repeat-x;
+              }
+              .bottom-div {
+                position: relative;
+                width: 400px;
+                height: 45%;
+                background-color: rgb(32, 183, 255);
+              }
+              .top-div {
+                background-color:rgb(202, 244, 251); 
+                width:100%; 
+                height:55%
+              }
+        </style>
+    </head>
+    <body>
+        <div class="card-container">
+            <div class="top-div">
+              <div style="display: flex; justify-content: center; padding-top:10px; margin-bottom:10px;">
+                <img src="./imgs/colorBubbles.png" class="white-cycle" />
+              </div>
+              <font style="color:rgb(32, 183, 255); font-size:20px; font-weight:bold;">Happy</font> <br>
+              <font style="color:rgb(37, 39, 94); font-size: 36px; font-weight:bold; font-family: cursive;">Birthday</font> <br>
+              <div class="flex-box">
+                  <div class="arrow-right"></div>
+                  <div class="mid-rectangle">TO YOU</div>
+                  <div class="arrow-left"></div>
+              </div><br><br>
+            </div>
+              
+            <div class="wavy"></div>
+            <div class="bottom-div">
+                <div style="margin-top: -2px; color: white; padding-top: 5px; padding-left: 40px; padding-right: 40px; padding-bottom: 10px">
+                  <h3 style="text-align:left;">Wishing you a wonderful day!</h3>
+                  <p style="text-align:left;">Dear Jackson，</p>
+                  <p style="text-align:left;">Hope you had a wonderful birthday! May your life be filled with wonderfle memories, Beautiful dreams and happiness all year through.</p>
+                  <p style="text-align:left;">-- Your Friend Bluelinksys</p>
+                  <div style="text-align: right"><img style="width:10x; height:10px" src="./imgs/colorBubbles.png"></div>
+                </div>
+                
+            </div>
+          
+        </div>
+        
+    </body>
+</html>
